@@ -55,4 +55,29 @@ class PdoSqliteTest extends TestCase {
         $connection = PdoSqlite::connect('sqlite:');
         $this->assertInstanceOf(PdoSqlite::class, $connection);
     }
+
+    #[DataProvider('pdoClassMethodListProvider')]
+    public function testClassMethods(PdoSqlite $sqlite, string $method, array $params): void {
+        $this->assertTrue(method_exists($sqlite, $method));
+
+        $reflector = new ReflectionClass($sqlite);
+        $method = $reflector->getMethod($method);
+        $paramList = $method->getParameters();
+        $list = [];
+        foreach ($paramList as $param) {
+            $list[] = $param->getName();
+        }
+        $this->assertSame($params, $list);
+    }
+
+    public static function pdoClassMethodListProvider(): array {
+        $connection = new PdoSqlite('sqlite:');
+        return [
+            'createAggregate' => [$connection, 'createAggregate', ['name', 'step', 'finalize', 'numArgs']],
+            'createCollation' => [$connection, 'createCollation', ['name', 'callback']],
+            'loadExtension' => [$connection, 'loadExtension', ['name']],
+            'openBlob' => [$connection, 'openBlob', ['table', 'column', 'rowid', 'dbname', 'flags']],
+        ];
+    }
+
 }

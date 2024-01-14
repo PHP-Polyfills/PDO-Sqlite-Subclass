@@ -38,12 +38,7 @@ class PdoSqlite extends PDO {
 
         return new static($dsn, $username, $password, $options);
     }
-    public function createAggregate(
-        string $name,
-        callable $step,
-        callable $finalize,
-        int $numArgs = -1
-    ): bool {
+    public function createAggregate(string $name, callable $step, callable $finalize, int $numArgs = -1): bool {
 
     }
 
@@ -57,13 +52,7 @@ class PdoSqlite extends PDO {
     public function loadExtension(string $name): void {}
 
     /** @return resource|false */
-    public function openBlob(
-        string $table,
-        string $column,
-        int $rowid,
-        ?string $dbname = "main",
-        int $flags = PdoSqlite::OPEN_READONLY
-    ) {
+    public function openBlob(string $table, string $column, int $rowid, ?string $dbname = "main", int $flags = PdoSqlite::OPEN_READONLY) {
 
     }
 }

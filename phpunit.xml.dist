@@ -14,15 +14,10 @@
          failOnEmptyTestSuite="true"
          beStrictAboutChangesToGlobalState="true"
          testdox="true"
-         defaultTestSuite="default"
          beStrictAboutCoverageMetadata="true">
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
-            <exclude>tests/PdoMysqlIntegrationTest.php</exclude>
-        </testsuite>
-        <testsuite name="full">
-            <file>tests/PdoMysqlIntegrationTest.php</file>
         </testsuite>
     </testsuites>
     <coverage>
